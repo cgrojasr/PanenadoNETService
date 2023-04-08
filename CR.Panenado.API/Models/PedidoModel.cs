@@ -1,23 +1,36 @@
-﻿namespace CR.Panenado.API.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
+
+namespace CR.Panenado.API.Models
 {
     public class PedidoModel
     {
         public class Entidad {
-            public int id_pedido { get; set; }
+            [JsonPropertyName("id_pedido")]
+            public int IdPedido { get; set; }
 
-            public DateTime fecha { get; set; }
+            public DateTime Fecha { get; set; }
 
-            public string direccion { get; set; } = null!;
+            public string Direccion { get; set; } = null!;
 
-            public string email { get; set; } = null!;
+            public string Email { get; set; } = null!;
 
-            public int estado { get; set; }
+            public int Estado { get; set; }
 
-            public DateTime? fecha_inicio { get; set; }
+            [JsonPropertyName("fecha_inicio")]
+            public DateTime? FechaInicio { get; set; }
 
-            public DateTime? fecha_fin { get; set; }
+            [JsonPropertyName("fecha_fin")]
+            public DateTime? FechaFin { get; set; }
 
-            public IQueryable<PedidoDetalleModel> items { get; set; }
+            [JsonPropertyName("hora_minuto")]
+            public TimeSpan? HoraMinuto { get; set; }
+
+            public List<PedidoDetalleModel.Entidad>? Items { get; set; }
+
+            public List<PedidoFechaModel.Entidad>? Fechas { get; set; }
 
         }
 

@@ -15,9 +15,11 @@ public partial class Pedido
 
     public int Estado { get; set; }
 
-    public DateTime? FechaInicio { get; set; }
+    public DateTime FechaInicio { get; set; }
 
-    public DateTime? FechaFin { get; set; }
+    public DateTime FechaFin { get; set; }
+
+    public TimeSpan? HoraMinuto { get; set; }
 
     public virtual ICollection<Orden> Ordens { get; } = new List<Orden>();
 

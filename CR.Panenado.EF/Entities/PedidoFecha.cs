@@ -9,7 +9,9 @@ public partial class PedidoFecha
 
     public int IdPedido { get; set; }
 
-    public string DiaSemana { get; set; } = null!;
+    public string? DiaSemana { get; set; }
+
+    public DateTime? Fecha { get; set; }
 
     public TimeSpan? HoraMinuto { get; set; }
 

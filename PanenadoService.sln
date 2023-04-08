@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR.Panenado.API", "CR.Panenado.API\CR.Panenado.API.csproj", "{E4B1A913-D5F9-47FB-BE4B-B02502D9FBE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CR.Panenado.API", "CR.Panenado.API\CR.Panenado.API.csproj", "{E4B1A913-D5F9-47FB-BE4B-B02502D9FBE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Services", "03.Services", "{8A588206-73F2-4E6A-AAE6-FD8148B57706}"
 EndProject
@@ -11,13 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.DataAccess", "01.DataAcc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.BusinessLogic", "02.BusinessLogic", "{CCD4B6A9-8684-4D24-8D8A-33EB6BFAF0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR.Panenado.EF", "CR.Panenado.EF\CR.Panenado.EF.csproj", "{C9A61030-8C90-4C5D-9C87-9B069C133F64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CR.Panenado.EF", "CR.Panenado.EF\CR.Panenado.EF.csproj", "{C9A61030-8C90-4C5D-9C87-9B069C133F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR.Panenado.DA", "CR.Panenado.DA\CR.Panenado.DA.csproj", "{1CFDDB66-748F-464D-A45E-C14C5F53CF2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CR.Panenado.DA", "CR.Panenado.DA\CR.Panenado.DA.csproj", "{1CFDDB66-748F-464D-A45E-C14C5F53CF2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR.Panenado.BE", "CR.Panenado.BE\CR.Panenado.BE.csproj", "{0300533C-8054-413B-9950-256BAB51D09A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CR.Panenado.BE", "CR.Panenado.BE\CR.Panenado.BE.csproj", "{0300533C-8054-413B-9950-256BAB51D09A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR.Paneando.BL", "CR.Paneando.BL\CR.Paneando.BL.csproj", "{5BFF4047-E2BD-4C74-A90A-1C86B3EDA0CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CR.Paneando.BL", "CR.Paneando.BL\CR.Paneando.BL.csproj", "{5BFF4047-E2BD-4C74-A90A-1C86B3EDA0CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CR.Paneando.UT", "CR.Paneando.UT\CR.Paneando.UT.csproj", "{CA5A2A99-604A-4A34-9180-8DEEFBE3DDED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5BFF4047-E2BD-4C74-A90A-1C86B3EDA0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BFF4047-E2BD-4C74-A90A-1C86B3EDA0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BFF4047-E2BD-4C74-A90A-1C86B3EDA0CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA5A2A99-604A-4A34-9180-8DEEFBE3DDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA5A2A99-604A-4A34-9180-8DEEFBE3DDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA5A2A99-604A-4A34-9180-8DEEFBE3DDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA5A2A99-604A-4A34-9180-8DEEFBE3DDED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{1CFDDB66-748F-464D-A45E-C14C5F53CF2F} = {589D1235-4346-440A-893D-0EE302324970}
 		{0300533C-8054-413B-9950-256BAB51D09A} = {CCD4B6A9-8684-4D24-8D8A-33EB6BFAF0C2}
 		{5BFF4047-E2BD-4C74-A90A-1C86B3EDA0CF} = {CCD4B6A9-8684-4D24-8D8A-33EB6BFAF0C2}
+		{CA5A2A99-604A-4A34-9180-8DEEFBE3DDED} = {CCD4B6A9-8684-4D24-8D8A-33EB6BFAF0C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F8D0D0B-1649-4C34-8197-5F08B921DB2B}

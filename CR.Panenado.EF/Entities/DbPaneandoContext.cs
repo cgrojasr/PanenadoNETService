@@ -30,7 +30,7 @@ public partial class DbPaneandoContext : DbContext
     public virtual DbSet<TipoProducto> TipoProductos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-EVIBPKO\\SQLEXPRESS; Database=dbPaneando; User Id=sa; Password=password;Encrypt=False;Trusted_Connection=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,6 +56,7 @@ public partial class DbPaneandoContext : DbContext
 
             entity.HasOne(d => d.IdPedidoNavigation).WithMany(p => p.Ordens)
                 .HasForeignKey(d => d.IdPedido)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_orden_pedido");
         });
 
@@ -64,8 +65,6 @@ public partial class DbPaneandoContext : DbContext
             entity.HasKey(e => e.IdPedido);
 
             entity.ToTable("pedido", tb => tb.HasTrigger("Registrar_PedidoFecha"));
-
-            entity.HasIndex(e => e.Estado, "NCI_estado");
 
             entity.Property(e => e.IdPedido).HasColumnName("id_pedido");
             entity.Property(e => e.Direccion)
@@ -86,6 +85,7 @@ public partial class DbPaneandoContext : DbContext
             entity.Property(e => e.FechaInicio)
                 .HasColumnType("date")
                 .HasColumnName("fecha_inicio");
+            entity.Property(e => e.HoraMinuto).HasColumnName("hora_minuto");
         });
 
         modelBuilder.Entity<PedidoDetalle>(entity =>
@@ -123,6 +123,9 @@ public partial class DbPaneandoContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("dia_semana");
+            entity.Property(e => e.Fecha)
+                .HasColumnType("date")
+                .HasColumnName("fecha");
             entity.Property(e => e.HoraMinuto).HasColumnName("hora_minuto");
             entity.Property(e => e.IdPedido).HasColumnName("id_pedido");
 

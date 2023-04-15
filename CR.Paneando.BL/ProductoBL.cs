@@ -1,4 +1,5 @@
-﻿using CR.Panenado.DA;
+﻿using CR.Panenado.BE;
+using CR.Panenado.DA;
 using CR.Panenado.EF.Entities;
 
 namespace CR.Paneando.BL
@@ -12,10 +13,15 @@ namespace CR.Paneando.BL
             objProductoDA= new ProductoDA();
         }
 
-        public IQueryable<Producto> Listar_Disponibles() {
+        public IEnumerable<ProductoBE.Catalogo> ListarCatalogo() {
             try
             {
-                return objProductoDA.Listar_Disponibles();
+                var lstProductos = objProductoDA.ListarCatalogo();
+                if (lstProductos.Count().Equals(0))
+                    throw new Exception("La consulta no contiene elementos");
+
+                return lstProductos;
+                    
             }
             catch (Exception)
             {

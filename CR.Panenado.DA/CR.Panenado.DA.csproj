@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CR.Panenado.BE\CR.Panenado.BE.csproj" />
     <ProjectReference Include="..\CR.Panenado.EF\CR.Panenado.EF.csproj" />
   </ItemGroup>
 

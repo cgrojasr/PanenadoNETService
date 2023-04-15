@@ -26,7 +26,7 @@ namespace CR.Panenado.API.Controllers
         {
             try
             {
-                return Ok(objProductoBL.Listar_Disponibles().ProjectTo<ProductoModel.CatalogoDisponible>(mapper.ConfigurationProvider));
+                return Ok(objProductoBL.ListarCatalogo());
             }
             catch (Exception)
             {

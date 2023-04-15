@@ -28,7 +28,7 @@ namespace CR.Paneando.BL
                 if (objPedido != null)
                 {
                     objPedido.Fecha = DateTime.Now;
-                    objPedido.Estado = 1;
+                    objPedido.Estado = Constants.PedidoEstado.Registrado;
                     for (DateTime fecha = objPedido.FechaInicio; fecha <= objPedido.FechaFin; fecha = fecha.AddDays(1))
                     {
                         var objPedidoFecha = new PedidoFecha();
@@ -47,7 +47,7 @@ namespace CR.Paneando.BL
             }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Tenemos problemas para registrar tu pedido, por favor verifica los datos y vuelve a intentar.");
             }
         }
     }

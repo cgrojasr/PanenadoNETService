@@ -22,18 +22,15 @@ namespace CR.Panenado.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registrar([FromBody]PedidoModel.Entidad objPedidoModel) {
+        public ActionResult Registrar([FromBody]PedidoModel objPedidoModel) {
             try
             {
-                //var items = objPedidoModel.Items.AsQueryable().ProjectTo<PedidoDetalle>(mapper.ConfigurationProvider);
                 var objPedido = objPedidoBL.Registrar(mapper.Map<Pedido>(objPedidoModel));
-                //return Ok(objPedido);
-
-                return Ok(mapper.Map<PedidoModel.Entidad>(objPedido));
+                return Ok(mapper.Map<PedidoModel>(objPedido));
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
     }

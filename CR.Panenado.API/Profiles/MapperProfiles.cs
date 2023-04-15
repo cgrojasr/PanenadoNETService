@@ -7,9 +7,9 @@ namespace CR.Panenado.API.Profiles
     public class MapperProfiles : Profile
     {
         public MapperProfiles() { 
-            CreateMap<Producto, ProductoModel.CatalogoDisponible>()
-                .ForMember(dest => dest.TipoProducto, source => source.MapFrom(s => s.IdTipoProductoNavigation.Nombre))
-                .ForMember(dest => dest.ValorVenta, source => source.MapFrom(s => s.ProductoPrecios.Where(x=>x.Activo).Single().ValorVenta));
+            //CreateMap<Producto, ProductoModel.CatalogoDisponible>()
+            //    .ForMember(dest => dest.TipoProducto, source => source.MapFrom(s => s.IdTipoProductoNavigation.Nombre))
+            //    .ForMember(dest => dest.ValorVenta, source => source.MapFrom(s => s.ProductoPrecios.Where(x=>x.Activo).Single().ValorVenta));
 
             //CreateMap<Pedido, PedidoModel>()
             //    .ForMember(dest => dest.Items, source => source.MapFrom(s => s.PedidoDetalles))
@@ -21,8 +21,11 @@ namespace CR.Panenado.API.Profiles
             CreateMap<PedidoDetalleModel, PedidoDetalle>();
             CreateMap<PedidoDetalle, PedidoDetalleModel>();
 
-            CreateMap<PedidoFechaModel.Entidad, PedidoFecha>();
-            CreateMap<PedidoFecha, PedidoFechaModel.Entidad>();
+            //CreateMap<PedidoFechaModel.Entidad, PedidoFecha>();
+            //CreateMap<PedidoFecha, PedidoFechaModel.Entidad>();
+
+            CreateMap<ProductoModel, Producto>();
+            CreateMap<Producto, ProductoModel>();
         }
     }
 }

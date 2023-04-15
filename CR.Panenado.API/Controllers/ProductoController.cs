@@ -5,6 +5,7 @@ using CR.Panenado.API.Models;
 using CR.Panenado.EF.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace CR.Panenado.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace CR.Panenado.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult Listar_Disponibles()
+        public ActionResult ListarCatalogo()
         {
             try
             {
@@ -32,6 +33,20 @@ namespace CR.Panenado.API.Controllers
             {
 
                 return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Registrar(ProductoModel objProductoModel) {
+            try
+            {
+                var objProducto = mapper.Map<Producto>(objProductoModel);
+                objProducto = objProductoBL.Registrar(objProducto);
+                return Ok(mapper.Map<ProductoModel>(objProducto));
+            }
+            catch (Exception)
+            {
+                return BadRequest("PROBLEMA");
             }
         }
     }

@@ -15,7 +15,7 @@ namespace CR.Panenado.DA
 
         public IEnumerable<ProductoBE.Catalogo> ListarCatalogo() {
             var productos = from pro in dc.Productos.Where(x => x.Activo && x.IdTipoProducto.Equals(1))
-                            join pre in dc.ProductoPrecios on pro.IdProducto equals pre.IdProducto
+                            join pre in dc.ProductoPrecios.Where(x=>x.Activo) on pro.IdProducto equals pre.IdProducto
                             join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
                             orderby pro.IdTipoProducto
                             select new ProductoBE.Catalogo
@@ -56,6 +56,13 @@ namespace CR.Panenado.DA
                                      };
 
             return lstProductosPrecio;
+        }
+
+        public int Registrar(Producto objProducto)
+        {
+            dc.Productos.Add(objProducto);
+            dc.SaveChanges();
+            return objProducto.IdProducto;
         }
     }
 }

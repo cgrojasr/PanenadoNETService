@@ -28,5 +28,18 @@ namespace CR.Paneando.BL
                 throw;
             }
         }
+
+        public Producto Registrar(Producto objProducto) {
+            try
+            {
+                objProducto.IdProducto = objProductoDA.Registrar(objProducto);
+                return objProducto;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -7,6 +7,8 @@ public partial class Pedido
 {
     public int IdPedido { get; set; }
 
+    public int? IdCliente { get; set; }
+
     public DateTime Fecha { get; set; }
 
     public string Direccion { get; set; } = null!;

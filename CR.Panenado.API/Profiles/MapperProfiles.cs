@@ -26,6 +26,9 @@ namespace CR.Panenado.API.Profiles
 
             CreateMap<ProductoModel, Producto>();
             CreateMap<Producto, ProductoModel>();
+
+            CreateMap<ClienteModel, Cliente>();
+            CreateMap<Cliente, ClienteModel>();
         }
     }
 }

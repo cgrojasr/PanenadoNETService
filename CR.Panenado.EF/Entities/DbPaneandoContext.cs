@@ -15,6 +15,8 @@ public partial class DbPaneandoContext : DbContext
     {
     }
 
+    public virtual DbSet<Cliente> Clientes { get; set; }
+
     public virtual DbSet<Orden> Ordens { get; set; }
 
     public virtual DbSet<Pedido> Pedidos { get; set; }
@@ -31,10 +33,36 @@ public partial class DbPaneandoContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=AAD\\SQLEXPRESS; Database=dbPaneando; User Id=sa; Password=password;Encrypt=False;Trusted_Connection=true");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-EVIBPKO\\SQLEXPRESS; Database=dbPaneando; User Id=sa; Password=password;Encrypt=False;Trusted_Connection=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Cliente>(entity =>
+        {
+            entity.HasKey(e => e.IdCliente);
+
+            entity.ToTable("cliente");
+
+            entity.Property(e => e.IdCliente).HasColumnName("id_cliente");
+            entity.Property(e => e.Activo).HasColumnName("activo");
+            entity.Property(e => e.Apellidos)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("apellidos");
+            entity.Property(e => e.Email)
+                .HasMaxLength(300)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Nombres)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("nombres");
+            entity.Property(e => e.Password)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("password");
+        });
+
         modelBuilder.Entity<Orden>(entity =>
         {
             entity.HasKey(e => e.IdOrden);
@@ -66,6 +94,8 @@ public partial class DbPaneandoContext : DbContext
 
             entity.ToTable("pedido", tb => tb.HasTrigger("Registrar_PedidoFecha"));
 
+            entity.HasIndex(e => e.Estado, "NCI_estado");
+
             entity.Property(e => e.IdPedido).HasColumnName("id_pedido");
             entity.Property(e => e.Direccion)
                 .HasMaxLength(1000)
@@ -85,7 +115,10 @@ public partial class DbPaneandoContext : DbContext
             entity.Property(e => e.FechaInicio)
                 .HasColumnType("date")
                 .HasColumnName("fecha_inicio");
-            entity.Property(e => e.HoraMinuto).HasColumnName("hora_minuto");
+            entity.Property(e => e.HoraMinuto)
+                .HasPrecision(0)
+                .HasColumnName("hora_minuto");
+            entity.Property(e => e.IdCliente).HasColumnName("id_cliente");
         });
 
         modelBuilder.Entity<PedidoDetalle>(entity =>

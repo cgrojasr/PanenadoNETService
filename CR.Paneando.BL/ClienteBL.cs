@@ -1,4 +1,5 @@
-﻿using CR.Panenado.DA;
+﻿using CR.Panenado.BE;
+using CR.Panenado.DA;
 using CR.Panenado.EF.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ namespace CR.Paneando.BL
             objClienteDA = new ClienteDA();
         }
 
-        public bool Autenticar(string email, string password) {
+        public ClienteBE_Autenticar Autenticar(string email, string password) {
             try
             {
                 var objCliente = objClienteDA.Autenticar(email, password);
                 if (objCliente != null)
-                    return true;
-                else return false;
+                    return objCliente;
+                else throw new Exception("El email o contraña ingresados son incorrectos");
             }
             catch (Exception)
             {

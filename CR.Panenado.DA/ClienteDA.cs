@@ -1,4 +1,5 @@
-﻿using CR.Panenado.EF.Entities;
+﻿using CR.Panenado.BE;
+using CR.Panenado.EF.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,17 @@ namespace CR.Panenado.DA
             dc = new DbPaneandoContext();
         }
 
-        public Cliente? Autenticar(string email, string password)
+        public ClienteBE_Autenticar? Autenticar(string email, string password)
         {
-            return dc.Clientes.First(x => x.Email.Equals(email) && x.Password.Equals(password));
+            var cliente = from cli in dc.Clientes.Where(x=>x.Email.Equals(email) && x.Password.Equals(password))
+                          select new ClienteBE_Autenticar
+                          { 
+                              IdCliente = cli.IdCliente,
+                              Nombres = cli.Nombres,
+                              Apellidos = cli.Apellidos,
+                              Email = cli.Email
+                          };
+            return cliente.Single();
         }
 
         public int Registrar(Cliente objCliente) { 

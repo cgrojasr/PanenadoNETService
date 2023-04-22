@@ -13,6 +13,8 @@ namespace CR.Panenado.BE
             public string TipoProducto { get; set; } = string.Empty;
             [JsonPropertyName("valor_venta")]
             public double ValorVenta { get; set; }
+            [JsonPropertyName("image_url")]
+            public string? ImageUrl { get; set; }
         }
 
         public class Precio

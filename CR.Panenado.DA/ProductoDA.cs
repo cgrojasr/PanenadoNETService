@@ -25,7 +25,8 @@ namespace CR.Panenado.DA
                                 Nombre = pro.Nombre,
                                 Descripcion = pro.Descripcion,
                                 TipoProducto = tip.Nombre,
-                                ValorVenta = pre.ValorVenta
+                                ValorVenta = pre.ValorVenta,
+                                ImageUrl = pro.ImageUrl
                             };
             return productos;
         }

@@ -181,6 +181,10 @@ public partial class DbPaneandoContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("descripcion");
             entity.Property(e => e.IdTipoProducto).HasColumnName("id_tipo_producto");
+            entity.Property(e => e.ImageUrl)
+                .HasMaxLength(1000)
+                .IsUnicode(false)
+                .HasColumnName("image_url");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(100)
                 .IsUnicode(false)

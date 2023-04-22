@@ -11,6 +11,8 @@ public partial class Producto
 
     public string Descripcion { get; set; } = null!;
 
+    public string? ImageUrl { get; set; }
+
     public int IdTipoProducto { get; set; }
 
     public bool Activo { get; set; }

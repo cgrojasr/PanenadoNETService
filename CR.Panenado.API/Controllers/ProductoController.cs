@@ -31,7 +31,6 @@ namespace CR.Panenado.API.Controllers
             }
             catch (Exception)
             {
-
                 return BadRequest();
             }
         }

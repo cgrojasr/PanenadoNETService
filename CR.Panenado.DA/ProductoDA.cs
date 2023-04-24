@@ -48,13 +48,18 @@ namespace CR.Panenado.DA
             return productos.Single();
         }
 
-        public IEnumerable<ProductoBE.Precio> BuscarPrecioPorListaIdProductos(List<int> lstIdProductos) {
+        public IEnumerable<ProductoBE.Catalogo> BuscarPorListaIdProductos(List<int> lstIdProductos) {
+            //var lstIdProductosInt = Array.ConvertAll(lstIdProductos.Split(','), int.Parse);
             var productos = from pre in dc.ProductoPrecios.Where(x => lstIdProductos.All(i => i.Equals(x.IdProducto)) && x.Activo)
+                            join pro in dc.Productos.Where(x=> x.Activo) on pre.IdProducto equals pro.IdProducto
                             orderby pre.IdProducto
-                            select new ProductoBE.Precio
+                            select new ProductoBE.Catalogo
                             {
                                 IdProducto = pre.IdProducto,
-                                ValorVenta = pre.ValorVenta
+                                Nombre = pro.Nombre,
+                                Descripcion = pro.Descripcion,
+                                ValorVenta = pre.ValorVenta,
+                                ImageUrl = pro.ImageUrl
                             };
 
             return productos;

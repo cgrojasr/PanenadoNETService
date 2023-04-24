@@ -41,5 +41,20 @@ namespace CR.Paneando.BL
                 throw;
             }
         }
+
+        public IEnumerable<ProductoBE.Catalogo> BuscarPorListaIdProductos(string strIdProductos)
+        {
+            try {
+                var lstIdProductos = Array.ConvertAll(strIdProductos.Split(','), int.Parse);
+                var productos = objProductoDA.BuscarPorListaIdProductos(lstIdProductos.ToList());
+                if (productos.Count() > 0)
+                    return productos;
+                else throw new Exception("No se encontraron resultados");
+            }
+            catch (Exception) { 
+                throw;
+            }
+
+        }
     }
 }

@@ -31,6 +31,24 @@ namespace CR.Panenado.DA
             return productos;
         }
 
+        public IEnumerable<ProductoBE.Catalogo> FiltrarCatalogoPorNombreODescripcion(string texto)
+        {
+            var productos = from pro in dc.Productos.Where(x => x.Activo && x.IdTipoProducto.Equals(1) && (x.Nombre.Contains(texto) || x.Descripcion.Contains(texto)))
+                            join pre in dc.ProductoPrecios.Where(x => x.Activo) on pro.IdProducto equals pre.IdProducto
+                            join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
+                            orderby pro.IdTipoProducto
+                            select new ProductoBE.Catalogo
+                            {
+                                IdProducto = pro.IdProducto,
+                                Nombre = pro.Nombre,
+                                Descripcion = pro.Descripcion,
+                                TipoProducto = tip.Nombre,
+                                ValorVenta = pre.ValorVenta,
+                                ImageUrl = pro.ImageUrl
+                            };
+            return productos;
+        }
+
         public ProductoBE.Catalogo BuscarCatalogoPorIdProducto(int idProducto) { 
             var productos = from pro in dc.Productos.Where(x=>x.IdProducto.Equals(idProducto))
                             join pre in dc.ProductoPrecios.Where(x => x.Activo) on pro.IdProducto equals pre.IdProducto

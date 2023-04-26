@@ -5,7 +5,9 @@ using CR.Panenado.API.Models;
 using CR.Panenado.EF.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 
 namespace CR.Panenado.API.Controllers
 {
@@ -22,12 +24,12 @@ namespace CR.Panenado.API.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet]
-        public ActionResult ListarCatalogo()
+        [HttpGet("{texto?}")]
+        public ActionResult ListarCatalogo(string texto = "")
         {
             try
             {
-                return Ok(objProductoBL.ListarCatalogo());
+                return Ok(objProductoBL.ListarCatalogo(texto));
             }
             catch (Exception)
             {

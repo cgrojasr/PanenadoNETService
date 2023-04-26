@@ -1,6 +1,7 @@
 ﻿using CR.Panenado.BE;
 using CR.Panenado.DA;
 using CR.Panenado.EF.Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CR.Paneando.BL
 {
@@ -13,15 +14,21 @@ namespace CR.Paneando.BL
             objProductoDA= new ProductoDA();
         }
 
-        public IEnumerable<ProductoBE.Catalogo> ListarCatalogo() {
+        public IEnumerable<ProductoBE.Catalogo> ListarCatalogo(string texto) {
             try
             {
-                var lstProductos = objProductoDA.ListarCatalogo();
+
+                IEnumerable<ProductoBE.Catalogo> lstProductos;
+                if (texto.IsNullOrEmpty())
+                    lstProductos = objProductoDA.ListarCatalogo();
+                else {
+                    lstProductos = objProductoDA.FiltrarCatalogoPorNombreODescripcion(texto);
+                }
+
                 if (lstProductos.Count().Equals(0))
                     throw new Exception("La consulta no contiene elementos");
 
                 return lstProductos;
-                    
             }
             catch (Exception)
             {

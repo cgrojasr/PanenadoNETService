@@ -42,6 +42,32 @@ namespace CR.Paneando.BL
             }
         }
 
+        public Producto Actualizar(Producto objProducto) {
+            try
+            {
+                return objProductoDA.Actualizar(objProducto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Producto Eliminar(int idProducto) {
+            try
+            {
+                var objProducto = objProductoDA.BuscarPorId(idProducto);
+                if (objProducto != null)
+                    return objProductoDA.Eliminar(objProducto);
+                else
+                    throw new Exception("No se encontro el producto a eliminar");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public IEnumerable<ProductoBE.Catalogo> BuscarPorListaIdProductos(string strIdProductos)
         {
             try {

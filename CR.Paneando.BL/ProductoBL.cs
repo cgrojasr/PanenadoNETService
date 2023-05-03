@@ -14,11 +14,11 @@ namespace CR.Paneando.BL
             objProductoDA= new ProductoDA();
         }
 
-        public IEnumerable<ProductoBE.Catalogo> ListarCatalogo(string texto) {
+        public IEnumerable<ProductoCatalogoBE> ListarCatalogo(string texto) {
             try
             {
 
-                IEnumerable<ProductoBE.Catalogo> lstProductos;
+                IEnumerable<ProductoCatalogoBE> lstProductos;
                 if (texto.IsNullOrEmpty())
                     lstProductos = objProductoDA.ListarCatalogo();
                 else {
@@ -45,6 +45,23 @@ namespace CR.Paneando.BL
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public IEnumerable<ProductoCatalogoBE> BuscarPorListaIdProductos(String strProductos)
+        {
+            try
+            {
+                var lstIdProductos = strProductos.Split(',').Select(int.Parse).ToList();
+                if (lstIdProductos.IsNullOrEmpty())
+                    throw new Exception("La lista no contiene Ids");
+                else {
+                    return objProductoDA.BuscarPorListaIdProductos(lstIdProductos);
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

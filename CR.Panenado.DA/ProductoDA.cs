@@ -14,12 +14,12 @@ namespace CR.Panenado.DA
             dc = new DbPaneandoContext();
         }
 
-        public IEnumerable<ProductoBE.Catalogo> ListarCatalogo() {
+        public IEnumerable<ProductoCatalogoBE> ListarCatalogo() {
             var productos = from pro in dc.Productos.Where(x => x.Activo && x.IdTipoProducto.Equals(1))
                             join pre in dc.ProductoPrecios.Where(x=>x.Activo) on pro.IdProducto equals pre.IdProducto
                             join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
                             orderby pro.IdTipoProducto
-                            select new ProductoBE.Catalogo
+                            select new ProductoCatalogoBE
                             {
                                 IdProducto = pro.IdProducto,
                                 Nombre = pro.Nombre,
@@ -31,13 +31,13 @@ namespace CR.Panenado.DA
             return productos;
         }
 
-        public IEnumerable<ProductoBE.Catalogo> FiltrarCatalogoPorNombreODescripcion(string texto)
+        public IEnumerable<ProductoCatalogoBE> FiltrarCatalogoPorNombreODescripcion(string texto)
         {
             var productos = from pro in dc.Productos.Where(x => x.Activo && x.IdTipoProducto.Equals(1) && (x.Nombre.Contains(texto) || x.Descripcion.Contains(texto)))
                             join pre in dc.ProductoPrecios.Where(x => x.Activo) on pro.IdProducto equals pre.IdProducto
                             join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
                             orderby pro.IdTipoProducto
-                            select new ProductoBE.Catalogo
+                            select new ProductoCatalogoBE
                             {
                                 IdProducto = pro.IdProducto,
                                 Nombre = pro.Nombre,
@@ -49,30 +49,37 @@ namespace CR.Panenado.DA
             return productos;
         }
 
-        public ProductoBE.Catalogo BuscarCatalogoPorIdProducto(int idProducto) { 
+        public ProductoCatalogoBE BuscarCatalogoPorIdProducto(int idProducto) { 
             var productos = from pro in dc.Productos.Where(x=>x.IdProducto.Equals(idProducto))
                             join pre in dc.ProductoPrecios.Where(x => x.Activo) on pro.IdProducto equals pre.IdProducto
                             join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
                             orderby pro.IdTipoProducto
-                            select new ProductoBE.Catalogo
+                            select new ProductoCatalogoBE
                             {
                                 IdProducto = pro.IdProducto,
                                 Nombre = pro.Nombre,
                                 Descripcion = pro.Descripcion,
                                 TipoProducto = tip.Nombre,
-                                ValorVenta = pre.ValorVenta
+                                ValorVenta = pre.ValorVenta,
+                                ImageUrl = pro.ImageUrl
                             };
 
             return productos.Single();
         }
 
-        public IEnumerable<ProductoBE.Precio> BuscarPrecioPorListaIdProductos(List<int> lstIdProductos) {
-            var productos = from pre in dc.ProductoPrecios.Where(x => lstIdProductos.All(i => i.Equals(x.IdProducto)) && x.Activo)
+        public IEnumerable<ProductoCatalogoBE> BuscarPorListaIdProductos(List<int> lstIdProductos) {
+            var productos = from pre in dc.ProductoPrecios.Where(x => lstIdProductos.Any(i => i.Equals(x.IdProducto)) && x.Activo)
+                            join pro in dc.Productos.Where(x=>x.Activo) on pre.IdProducto equals pro.IdProducto
+                            join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
                             orderby pre.IdProducto
-                            select new ProductoBE.Precio
+                            select new ProductoCatalogoBE
                             {
-                                IdProducto = pre.IdProducto,
-                                ValorVenta = pre.ValorVenta
+                                IdProducto = pro.IdProducto,
+                                Nombre = pro.Nombre,
+                                Descripcion = pro.Descripcion,
+                                TipoProducto = tip.Nombre,
+                                ValorVenta = pre.ValorVenta,
+                                ImageUrl = pro.ImageUrl
                             };
 
             return productos;
@@ -87,6 +94,7 @@ namespace CR.Panenado.DA
 
         public Producto Eliminar(Producto objProducto) {
             dc.Productos.Remove(objProducto);
+            dc.SaveChanges();
             return objProducto;
         }
 

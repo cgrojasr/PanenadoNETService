@@ -24,8 +24,8 @@ namespace CR.Panenado.API.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("{texto?}")]
-        public ActionResult ListarCatalogo(string texto = "")
+        [HttpGet]
+        public ActionResult ListarCatalogo([FromQuery(Name = "texto")] string texto = "")
         {
             try
             {
@@ -49,6 +49,19 @@ namespace CR.Panenado.API.Controllers
             catch (Exception)
             {
                 return BadRequest("PROBLEMA");
+            }
+        }
+
+        [HttpGet("BuscarPorListaIds")]
+        public ActionResult BuscarPorListaIdProductos([FromQuery(Name = "strIdProductos")] string strIdProductos = "")
+        {
+            try
+            {
+                return Ok(objProductoBL.BuscarPorListaIdProductos(strIdProductos));
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }

@@ -65,5 +65,46 @@ namespace CR.Paneando.BL
                 throw;
             }
         }
+
+        public Producto Actualizar(Producto objProducto) {
+            try
+            {
+                return objProductoDA.Actualizar(objProducto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Producto Eliminar(int idProducto) {
+            try
+            {
+                var objProducto = objProductoDA.BuscarPorId(idProducto);
+                if (objProducto != null)
+                    return objProductoDA.Eliminar(objProducto);
+                else
+                    throw new Exception("No se encontro el producto a eliminar");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<ProductoBE.Catalogo> BuscarPorListaIdProductos(string strIdProductos)
+        {
+            try {
+                var lstIdProductos = Array.ConvertAll(strIdProductos.Split(','), int.Parse);
+                var productos = objProductoDA.BuscarPorListaIdProductos(lstIdProductos.ToList());
+                if (productos.Count() > 0)
+                    return productos;
+                else throw new Exception("No se encontraron resultados");
+            }
+            catch (Exception) { 
+                throw;
+            }
+
+        }
     }
 }

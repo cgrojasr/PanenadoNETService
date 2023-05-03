@@ -67,19 +67,13 @@ namespace CR.Panenado.DA
             return productos.Single();
         }
 
-        public IEnumerable<ProductoCatalogoBE> BuscarPorListaIdProductos(List<int> lstIdProductos) {
-            var productos = from pre in dc.ProductoPrecios.Where(x => lstIdProductos.Any(i => i.Equals(x.IdProducto)) && x.Activo)
-                            join pro in dc.Productos.Where(x=>x.Activo) on pre.IdProducto equals pro.IdProducto
-                            join tip in dc.TipoProductos on pro.IdTipoProducto equals tip.IdTipoProducto
+        public IEnumerable<ProductoBE.Precio> BuscarPrecioPorListaIdProductos(List<int> lstIdProductos) {
+            var productos = from pre in dc.ProductoPrecios.Where(x => lstIdProductos.All(i => i.Equals(x.IdProducto)) && x.Activo)
                             orderby pre.IdProducto
-                            select new ProductoCatalogoBE
+                            select new ProductoBE.Precio
                             {
-                                IdProducto = pro.IdProducto,
-                                Nombre = pro.Nombre,
-                                Descripcion = pro.Descripcion,
-                                TipoProducto = tip.Nombre,
-                                ValorVenta = pre.ValorVenta,
-                                ImageUrl = pro.ImageUrl
+                                IdProducto = pre.IdProducto,
+                                ValorVenta = pre.ValorVenta
                             };
 
             return productos;

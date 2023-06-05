@@ -51,12 +51,12 @@ namespace CR.Panenado.API.Controllers
             }
         }
 
-        [HttpGet("BuscarPorListaIds")]
-        public ActionResult BuscarPorListaIdProductos([FromQuery(Name = "strIdProductos")] string strIdProductos = "")
+        [HttpGet("ListarPorIds")]
+        public ActionResult ListarProductosPorListaIds([FromQuery(Name = "strIdProductos")] string strIdProductos = "")
         {
             try
             {
-                return Ok(objProductoBL.BuscarPorListaIdProductos(strIdProductos));
+                return Ok(objProductoBL.ListarProductosPorListaIds(strIdProductos));
             }
             catch (Exception)
             {

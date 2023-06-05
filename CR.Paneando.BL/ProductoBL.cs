@@ -49,7 +49,7 @@ namespace CR.Paneando.BL
             }
         }
 
-        public IEnumerable<ProductoCatalogoBE> BuscarPorListaIdProductos(String strProductos)
+        public IEnumerable<ProductoCatalogoBE> ListarProductosPorListaIds(String strProductos)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace CR.Paneando.BL
                 if (lstIdProductos.IsNullOrEmpty())
                     throw new Exception("La lista no contiene Ids");
                 else {
-                    return objProductoDA.BuscarPorListaIdProductos(lstIdProductos);
+                    return objProductoDA.ListarProductosPorListaIds(lstIdProductos);
                 }
             }
             catch (Exception)
@@ -90,21 +90,6 @@ namespace CR.Paneando.BL
             {
                 throw;
             }
-        }
-
-        public IEnumerable<ProductoBE.Catalogo> BuscarPorListaIdProductos(string strIdProductos)
-        {
-            try {
-                var lstIdProductos = Array.ConvertAll(strIdProductos.Split(','), int.Parse);
-                var productos = objProductoDA.BuscarPorListaIdProductos(lstIdProductos.ToList());
-                if (productos.Count() > 0)
-                    return productos;
-                else throw new Exception("No se encontraron resultados");
-            }
-            catch (Exception) { 
-                throw;
-            }
-
         }
     }
 }
